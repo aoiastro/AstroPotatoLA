@@ -4,9 +4,12 @@ options:
   minimumXcodeGenVersion: 2.39.0
 
 packages:
-  LocalLLMClient:
-    url: https://github.com/tattn/LocalLLMClient.git
-    branch: main
+  mlx-swift:
+    url: https://github.com/ml-explore/mlx-swift
+    version: 0.30.6
+  mlx-swift-lm:
+    url: https://github.com/ml-explore/mlx-swift-lm
+    version: 0.30.6
 
 targets:
   AstroPotatoLA:
@@ -21,9 +24,7 @@ targets:
       CODE_SIGNING_ALLOWED: "NO"
       ENABLE_BITCODE: "NO"
     dependencies:
-      - package: LocalLLMClient
-        product: LocalLLMClient
-      - package: LocalLLMClient
-        product: LocalLLMClientLlama
-      - package: LocalLLMClient
-        product: LocalLLMClientMLX
+      - package: mlx-swift
+        product: MLX
+      - package: mlx-swift-lm
+        product: MLXLLM
