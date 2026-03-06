@@ -33,6 +33,7 @@ jobs:
           CODE_SIGN_IDENTITY="" \
           CODE_SIGN_ENTITLEMENTS="" \
           ENABLE_BITCODE="NO" \
+          ENABLE_PREVIEWS="NO" \
           CONFIGURATION_BUILD_DIR="$(pwd)/build"
 
     - name: Package IPA
