@@ -1,0 +1,29 @@
+name: AstroPotatoLA
+options:
+  bundleIdPrefix: com.astropotatola
+  minimumXcodeGenVersion: 2.39.0
+
+packages:
+  LocalLLMClient:
+    url: https://github.com/tattn/LocalLLMClient.git
+    branch: main
+
+targets:
+  AstroPotatoLA:
+    type: application
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources: [Sources/AstroPotatoLA]
+    settings:
+      CODE_SIGN_IDENTITY: ""
+      CODE_SIGNING_REQUIRED: "NO"
+      CODE_SIGN_ENTITLEMENTS: ""
+      CODE_SIGNING_ALLOWED: "NO"
+      ENABLE_BITCODE: "NO"
+    dependencies:
+      - package: LocalLLMClient
+        product: LocalLLMClient
+      - package: LocalLLMClient
+        product: LocalLLMClientLlama
+      - package: LocalLLMClient
+        product: LocalLLMClientMLX

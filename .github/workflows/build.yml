@@ -1,0 +1,47 @@
+name: Build Unsigned IPA
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-15
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install XcodeGen
+      run: brew install xcodegen
+
+    - name: Generate Xcode Project
+      run: xcodegen generate
+
+    - name: Build App
+      run: |
+        xcodebuild clean build \
+          -project AstroPotatoLA.xcodeproj \
+          -scheme AstroPotatoLA \
+          -sdk iphoneos \
+          -configuration Release \
+          CODE_SIGNING_ALLOWED="NO" \
+          CODE_SIGNING_REQUIRED="NO" \
+          CODE_SIGN_IDENTITY="" \
+          CODE_SIGN_ENTITLEMENTS="" \
+          ENABLE_BITCODE="NO" \
+          CONFIGURATION_BUILD_DIR="$(pwd)/build"
+
+    - name: Package IPA
+      run: |
+        mkdir -p Payload
+        mv build/AstroPotatoLA.app Payload/
+        zip -r AstroPotatoLA.ipa Payload
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: AstroPotatoLA-unsigned-ipa
+        path: AstroPotatoLA.ipa
