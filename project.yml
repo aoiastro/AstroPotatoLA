@@ -9,7 +9,7 @@ packages:
     version: 0.30.6
   mlx-swift-lm:
     url: https://github.com/ml-explore/mlx-swift-lm
-    version: 0.30.6
+    version: 2.30.6
 
 targets:
   AstroPotatoLA:
